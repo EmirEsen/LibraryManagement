@@ -1,12 +1,5 @@
 package org.example.data;
-
-import org.example.manager.Library;
 import org.example.utilities.Util;
-
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public abstract class Book {
     public enum Status {

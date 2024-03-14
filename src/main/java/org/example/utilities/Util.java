@@ -8,7 +8,7 @@ public abstract class Util {
 
     public static Scanner scanner = new Scanner(System.in);
 
-    //generated and return random id
+    //generates and returns random id
     public static String UUIDGenerator(){
         UUID uuid = UUID.randomUUID();
         return uuid.toString();

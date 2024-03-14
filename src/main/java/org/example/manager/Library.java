@@ -8,7 +8,6 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-
 public class Library implements ILibraryActivities, ICustomerActivities, IAdminActivities {
     private Map<String, List<Book>> books = new LinkedHashMap<>(); //(k-isbn, List of books with same ISBN)
     private Map<String, Customer> customers = new LinkedHashMap<>();
@@ -21,7 +20,8 @@ public class Library implements ILibraryActivities, ICustomerActivities, IAdminA
         List<Book> isbnSameBooks = books.get(isbn);
 
         if (customer.getRentedBooks().containsKey(isbnSameBooks.getFirst())) {
-            System.out.println("\u001B[31mBook has been already rented, Can not rent the same books.\u001B[0m");
+            System.out.println("\u001B[31mBook has been already rented, Can not rent the same book.\u001B[0m");
+            return false;
         }
 
         for (Book book : isbnSameBooks) {
@@ -176,18 +176,28 @@ public class Library implements ILibraryActivities, ICustomerActivities, IAdminA
         switch (Integer.parseInt(input)) {
             case 1 -> {
                 System.out.println("-----------------------------------------------");
-                customers.entrySet().stream().sorted(Comparator.comparing(e -> e.getValue().getFirstName())).map(Map.Entry::getValue).forEach(System.out::println);
+                customers.entrySet().stream()
+                        .sorted(Comparator.comparing(e -> e.getValue().getFirstName()))
+                        .map(Map.Entry::getValue)
+                        .forEach(System.out::println);
                 System.out.println("-----------------------------------------------");
             }
             case 2 -> {
                 System.out.println("-----------------------------------------------");
-                customers.entrySet().stream().sorted(Comparator.comparing(e -> e.getValue().getLastName())).map(Map.Entry::getValue).forEach(System.out::println);
+                customers.entrySet()
+                        .stream()
+                        .sorted(Comparator.comparing(e -> e.getValue().getLastName()))
+                        .map(Map.Entry::getValue)
+                        .forEach(System.out::println);
                 System.out.println("-----------------------------------------------");
             }
             case 3 -> {
                 int year = Util.intScanner("Enter Year: ");
                 System.out.println("-----------------------------------------------");
-                customers.values().stream().filter(customer -> customer.getDateJoined().getYear() > year).forEach(System.out::println);
+                customers.values().stream()
+                        .filter(customer -> customer.getDateJoined()
+                                .getYear() > year)
+                        .forEach(System.out::println);
                 System.out.println("-----------------------------------------------");
             }
         }
